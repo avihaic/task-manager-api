@@ -5,8 +5,7 @@ const taskRouter = require('./routers/task')
 require('mongoose')
 
 const app = express()
-//const port = process.env.PORT
-const port = 3000
+const port = process.env.PORT
 
 
 app.use(express.json())

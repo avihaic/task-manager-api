@@ -1,7 +1,6 @@
 const sgMail = require('@sendgrid/mail')
 const { model } = require('mongoose')
-//sgMail.setApiKey(process.env.SENDGRID_API_KEY)
-sgMail.setApiKey('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')
+sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 const sendwelcomemail = (email,name) => {
     console.log(email,name)
         sgMail.send({

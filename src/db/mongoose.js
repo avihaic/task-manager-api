@@ -1,10 +1,9 @@
 const mongoose = require('mongoose')
 
-mongoose.connect('mongodb+srv://taskApp:avihaic524310@cluster0.kfuwr.mongodb.net/task-manager-api?retryWrites=true',{
+mongoose.connect(process.env.MONGODB_URL,{
     useNewUrlParser:true,
     useCreateIndex:true,
     useUnifiedTopology: true
 })
-
 
 
