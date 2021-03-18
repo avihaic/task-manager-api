@@ -6,6 +6,7 @@ const auth = require('../middelware/auth')
 const multer = require('multer')
 const sharp = require('sharp')
 const {sendwelcomemail,senddeletemail} = require('../emails/account')
+const { find } = require('../models/user')
 
 /*Create User */
 router.post('/users', async (req, res) =>{
@@ -58,27 +59,15 @@ router.post('/users/logoutall', auth ,async (req,res) =>{
 })
 
 //show my profile
-router.get('/users/mypro' ,async (req,res) => {
-        try {
-                const token = req.header('Authorization').replace('Bearer ', '')
-                const decoded = jwt.verify(token, process.env.JWT_SECRET)
-                console.log(token, process.env.JWT_SECRET)
-                const user = await User.findOne({ _id: decoded._id, 'tokens.token': token})
-                console.log(decoded._id)
-                if(!user){
-                    res.status(404).send('no user')
-                }
-                res.status(200).send(user)
-                console.log(user)
-            } catch (e) {
-                res.status(404).send('please Authenticate')
-            }
+router.get('/users/me', auth ,async (req,res) => {
+res.send(req.user)
 })
 
 //show all user
 router.get('/users' , async (req,res) => {
     try {
         const users = await User.find({});
+        console.log('aaaaaa',users)
         res.send(users)
     } catch (e) {
         res.send('no user')
