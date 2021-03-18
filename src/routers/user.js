@@ -58,7 +58,7 @@ router.post('/users/logoutall', auth ,async (req,res) =>{
 })
 
 //show my profile
-router.get('/users/me' ,async (req,res,next) => {
+router.get('/users/mypro' ,async (req,res) => {
         try {
                 const token = req.header('Authorization').replace('Bearer ', '')
                 const decoded = jwt.verify(token, process.env.JWT_SECRET)
@@ -70,8 +70,6 @@ router.get('/users/me' ,async (req,res,next) => {
                 }
                 res.status(200).send(user)
                 console.log(user)
-                
-                next()
             } catch (e) {
                 res.status(404).send('please Authenticate')
             }
