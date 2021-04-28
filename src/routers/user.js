@@ -28,7 +28,7 @@ try {
     const token = await user.generateauthtoken()
     res.send({user,token})
     } catch (e) {
-        res.send(e)
+        res.status(400).send('cant login')
     }
 })
 
